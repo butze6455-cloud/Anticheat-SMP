@@ -1,0 +1,21 @@
+name: VanyaAC
+version: 1.0.0
+main: de.vanyasmp.vanyaac.VanyaAC
+api-version: '1.21'
+author: VanyaSMP
+description: Anticheat fuer den VanyaSMP (Paper)
+commands:
+  vac:
+    description: VanyaAC Verwaltung
+    usage: /vac <alerts|info|reset|reload>
+    aliases: [vanyaac]
+permissions:
+  vanyaac.admin:
+    description: Admin-Befehle von VanyaAC
+    default: op
+  vanyaac.alerts:
+    description: Anticheat-Alerts empfangen
+    default: op
+  vanyaac.bypass:
+    description: Von allen Checks ausgenommen
+    default: false

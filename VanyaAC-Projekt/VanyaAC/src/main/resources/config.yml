@@ -1,0 +1,90 @@
+# ============================================================
+#  VanyaAC - Konfiguration
+# ============================================================
+
+general:
+  bypass-permission: "vanyaac.bypass"
+  min-tps: 17.5          # unter diesem TPS-Wert werden Bewegungs-Checks pausiert
+  max-ping: 600          # ueber diesem Ping werden Bewegungs-Checks pausiert
+  setback: true          # Spieler bei Verstoss zuruecksetzen
+  cancel-hits: true      # verdaechtige Treffer abbrechen
+
+alerts:
+  format: "&8[&dVanyaAC&8] &f%player% &7> &d%check% &8(&7%info%&8) &7VL &d%vl% &8| &7Ping &f%ping%ms"
+  console: true
+  log-file: true
+  enable-on-join: true   # Teammitglieder mit vanyaac.alerts bekommen Alerts automatisch
+
+# VL, die alle 30 Sekunden um die Haelfte dieses Werts sinken (Wert = pro Minute)
+vl-decay-per-minute: 4.0
+
+checks:
+  fly:
+    enabled: true
+    buffer: 3
+    tolerance: 0.08
+    weight: 1.0
+  speed:
+    enabled: true
+    buffer: 4
+    multiplier: 1.0      # hoeher = lockerer
+    weight: 1.0
+  nofall:
+    enabled: true
+    buffer: 2
+    weight: 2.0
+  timer:
+    enabled: true
+    threshold-ms: 300
+    weight: 1.0
+  reach:
+    enabled: true
+    buffer: 2
+    tolerance: 0.3
+    weight: 1.0
+  killaura:
+    enabled: true
+    max-angle: 70
+    multi-targets: 3
+    weight: 1.0
+  autoclicker:
+    enabled: true
+    max-cps: 22
+    weight: 1.0
+  nuker:
+    enabled: true
+    max-per-second: 24
+    weight: 1.0
+  blockreach:
+    enabled: true
+    tolerance: 0.6
+    weight: 1.0
+  xray:
+    enabled: true
+    min-samples: 200     # mindestens so viele Stein-/Erzbloecke abgebaut
+    min-rare: 4          # mindestens so viele Diamanten/Debris/Smaragde
+    max-ratio: 0.03      # Anteil seltener Erze am Abbau (normal ca. 0.3 %)
+    weight: 5.0
+
+# Strafen: "<VL>:<Konsolenbefehl>"  -  Platzhalter: %player% %check% %vl%
+# Standardmaessig nur Kicks, damit niemand durch Lag gebannt wird.
+# Bans kannst du selbst ergaenzen, z.B. "60:ban %player% Cheating"
+punishments:
+  fly:
+    - "15:kick %player% [VanyaAC] Unerlaubte Bewegung"
+  speed:
+    - "15:kick %player% [VanyaAC] Unerlaubte Geschwindigkeit"
+  nofall:
+    - "10:kick %player% [VanyaAC] NoFall"
+  timer:
+    - "12:kick %player% [VanyaAC] Timer"
+  reach:
+    - "15:kick %player% [VanyaAC] Reach"
+  killaura:
+    - "12:kick %player% [VanyaAC] KillAura"
+  autoclicker:
+    - "12:kick %player% [VanyaAC] AutoClicker"
+  nuker:
+    - "10:kick %player% [VanyaAC] Nuker"
+  blockreach:
+    - "10:kick %player% [VanyaAC] Block-Reach"
