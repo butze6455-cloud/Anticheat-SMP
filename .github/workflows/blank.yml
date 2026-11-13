@@ -1,8 +1,31 @@
+name: Build VanyaAC
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Dateien anzeigen
+        run: find . -not -path "./.git/*" | head -60
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+          cache: maven
+
       - name: Plugin bauen
-        working-directory: VanyaAC
-        run: mvn -B clean package
+        run: |
+          POM=$(find . -name pom.xml | head -n 1)
+          echo "pom.xml gefunden: $POM"
+          mvn -B -f "$POM" clean package
 
       - uses: actions/upload-artifact@v4
         with:
           name: VanyaAC
-          path: VanyaAC/target/VanyaAC.jar
+          path: "**/target/VanyaAC.jar"
